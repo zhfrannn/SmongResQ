@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmongResQ: AI-Powered Story Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .wave-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave-bg::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8fafc' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .aceh-motif {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0V0zm10 10h80v80H10V10zm20 20h40v40H30V30zm10 10h20v20H40V40z' fill='%233b82f6' fill-opacity='0.05'/%3E%3C/svg%3E");
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .map-area:hover {
+            fill: rgba(59, 130, 246, 0.3);
+            stroke: #3b82f6;
+            stroke-width: 2px;
+        }
+        
+        .healing-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        
+        .audio-wave {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q 5 5 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10' stroke='%233b82f6' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 100px 20px;
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-dove text-indigo-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">SmongResQ</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#" class="text-indigo-600 font-medium">Home</a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">Archive</a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">About</a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">Contact</a>
+                    <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition">Share Your Story</button>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="wave-bg text-white pt-20 pb-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Suara Samudra</h1>
+                    <p class="text-xl md:text-2xl mb-8 font-light italic">"Stories of Resilience and Peace, Two Decades After the Wave"</p>
+                    <p class="mb-8 text-lg">An AI-powered archive preserving Aceh's collective memory of disaster and peace through community stories.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition flex items-center">
+                            <i class="fab fa-whatsapp mr-2 text-xl"></i> Share Your Story
+                        </button>
+                        <button class="bg-white hover:bg-gray-100 text-indigo-600 px-6 py-3 rounded-full font-medium transition">
+                            Explore Archive
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-2xl p-6 shadow-xl">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="https://images.unsplash.com/photo-1518540119810-1e1d7e5ff4a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Aceh coastline" class="rounded-xl object-cover w-full h-full">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 p-3 rounded-full mr-3">
+                                    <i class="fas fa-microphone text-indigo-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Latest Story</p>
+                                    <p class="font-medium">Survivor's Journey</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Collection Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Share Your Story</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Your voice matters. Help us preserve Aceh's collective memory for future generations.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- WhatsApp Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fab fa-whatsapp text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">WhatsApp Assistant</h3>
+                    <p class="text-gray-600 mb-6 text-center">Send your voice, text, or video story directly through WhatsApp.</p>
+                    <button class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-full font-medium transition flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i> Start Chat
+                    </button>
+                </div>
+                
+                <!-- Youth Ambassador -->
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
+                    <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-hands-helping text-amber-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">Youth Ambassadors</h3>
+                    <p class="text-gray-600 mb-6 text-center">Our young volunteers can help document your story if you prefer assistance.</p>
+                    <button class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-full font-medium transition">
+                        Request Assistance
+                    </button>
+                </div>
+                
+                <!-- Upload Form -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-cloud-upload-alt text-indigo-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-4">Direct Upload</h3>
+                    <p class="text-gray-600 mb-6 text-center">Upload text, audio, or video files directly to our secure platform.</p>
+                    <button class="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-3 rounded-full font-medium transition">
+                        Upload Story
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Processing Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 aceh-motif"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">AI-Powered Story Processing</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our technology transforms raw stories into meaningful digital experiences.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <!-- NLP -->
+                <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
+                    <div class="bg-blue-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">NLP Analysis</h3>
+                    <p class="text-gray-600 text-sm">Extracting themes, emotions, and key events from each story.</p>
+                </div>
+                
+                <!-- Translation -->
+                <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
+                    <div class="bg-cyan-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-language text-cyan-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Multilingual</h3>
+                    <p class="text-gray-600 text-sm">Translating stories between Acehnese, Indonesian, and English.</p>
+                </div>
+                
+                <!-- Visualization -->
+                <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
+                    <div class="bg-purple-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-pie text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Visualization</h3>
+                    <p class="text-gray-600 text-sm">Creating interactive timelines and infographics from narratives.</p>
+                </div>
+                
+                <!-- Gamification -->
+                <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
+                    <div class="bg-orange-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-gamepad text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Gamification</h3>
+                    <p class="text-gray-600 text-sm">Turning stories into educational simulations and quizzes.</p>
+                </div>
+            </div>
+            
+            <!-- Process Flow -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-6 md:mb-0 text-center md:text-left">
+                        <h3 class="text-xl font-semibold mb-2">From Story to Digital Experience</h3>
+                        <p class="text-gray-600">See how raw narratives become interactive learning tools.</p>
+                    </div>
+                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-full font-medium transition">
+                        View Process Details
+                    </button>
+                </div>
+                
+                <div class="mt-8">
+                    <div class="relative">
+                        <!-- Process Steps -->
+                        <div class="hidden md:flex justify-between items-center mb-8">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mb-2">
+                                    <i class="fas fa-microphone"></i>
+                                </div>
+                                <p class="text-sm font-medium">Story Collection</p>
+                            </div>
+                            <div class="h-1 flex-1 bg-blue-200 mx-4"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center text-white mb-2">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <p class="text-sm font-medium">AI Processing</p>
+                            </div>
+                            <div class="h-1 flex-1 bg-cyan-200 mx-4"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white mb-2">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <p class="text-sm font-medium">Digital Formatting</p>
+                            </div>
+                            <div class="h-1 flex-1 bg-purple-200 mx-4"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white mb-2">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <p class="text-sm font-medium">Community Access</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Mobile Process Steps -->
+                        <div class="md:hidden space-y-8">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-blue-500 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4">
+                                    <i class="fas fa-microphone"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Story Collection</p>
+                                    <p class="text-sm text-gray-600">Community members share their experiences</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-cyan-500 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">AI Processing</p>
+                                    <p class="text-sm text-gray-600">Natural language processing and analysis</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-purple-500 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Digital Formatting</p>
+                                    <p class="text-sm text-gray-600">Creating interactive media formats</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-orange-500 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Community Access</p>
+                                    <p class="text-sm text-gray-600">Shared through multiple platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Media Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Explore Stories</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Experience Aceh's stories through interactive digital formats.</p>
+            </div>
+            
+            <!-- Aceh Map -->
+            <div class="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-md">
+                <h3 class="text-xl font-semibold mb-6 text-center">Stories by Region</h3>
+                <div class="relative">
+                    <svg viewBox="0 0 800 500" class="w-full h-auto">
+                        <!-- Simplified Aceh map outline -->
+                        <path id="banda-aceh" class="map-area" d="M200,150 Q250,120 300,150 Q350,180 400,170 Q450,160 500,180 Q550,200 600,190 L620,210 L600,230 L580,220 L560,240 L540,230 L520,250 L500,240 L480,260 L460,250 L440,270 L420,260 L400,280 L380,270 L360,290 L340,280 L320,300 L300,290 L280,310 L260,300 L240,320 L220,310 L200,330 L180,320 L160,340 L140,330 L120,350 L100,340 L80,360 L60,350 L40,370 L20,360 L0,380 L20,400 L40,390 L60,410 L80,400 L100,420 L120,410 L140,430 L160,420 L180,440 L200,430 L220,450 L240,440 L260,460 L280,450 L300,470 L320,460 L340,480 L360,470 L380,490 L400,480 L420,500 L440,490 L460,470 L480,460 L500,440 L520,430 L540,410 L560,400 L580,380 L600,370 L620,350 L640,340 L660,320 L680,310 L700,290 L720,280 L740,260 L760,250 L780,230 L800,220 L780,200 L760,190 L740,170 L720,160 L700,140 L680,130 L660,110 L640,100 L620,80 L600,70 L580,50 L560,40 L540,20 L520,10 L500,0 L480,10 L460,30 L440,40 L420,60 L400,70 L380,90 L360,100 L340,120 L320,130 L300,150 Z" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="300" y="250" font-size="16" fill="#1E40AF" font-weight="bold">Banda Aceh</text>
+                        <text x="500" y="350" font-size="16" fill="#1E40AF" font-weight="bold">Meulaboh</text>
+                        <text x="400" y="150" font-size="16" fill="#1E40AF" font-weight="bold">Lhokseumawe</text>
+                    </svg>
+                    <div class="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
+                        <p class="text-sm text-gray-600">Click on any region to explore local stories</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Digital Comic -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-amber-100 to-orange-100 flex items-center justify-center">
+                        <i class="fas fa-book-open text-amber-500 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded">Digital Comic</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">The Wave Remembered</h3>
+                        <p class="text-gray-600 mb-4">A visual retelling of survivor accounts through graphic storytelling.</p>
+                        <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            Read Story <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Audio Drama -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-100 to-indigo-100 flex items-center justify-center relative">
+                        <i class="fas fa-headphones text-indigo-500 text-6xl"></i>
+                        <div class="absolute bottom-0 left-0 right-0 h-12 audio-wave"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Audio Drama</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Voices from the Rubble</h3>
+                        <p class="text-gray-600 mb-4">An immersive audio experience based on survivor testimonies.</p>
+                        <div class="flex items-center justify-between">
+                            <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                                Listen <i class="fas fa-play ml-2"></i>
+                            </button>
+                            <span class="text-sm text-gray-500">32 min</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Simulation -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
+                        <i class="fas fa-gamepad text-purple-500 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">Simulation</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">What Would You Do?</h3>
+                        <p class="text-gray-600 mb-4">An interactive scenario based on real evacuation decisions.</p>
+                        <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            Try Simulation <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Healing Mode -->
+            <div class="mt-12 healing-gradient rounded-2xl p-8 text-white shadow-lg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="mb-6 md:mb-0 md:mr-8">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-dove text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Healing Mode</h3>
+                        <p class="opacity-90">A calming space for reflection and peace, featuring guided meditations and soothing narratives.</p>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Ocean Meditation</p>
+                                    <p class="text-sm opacity-80">10 min guided practice</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Peace Journal</p>
+                                    <p class="text-sm opacity-80">Reflective writing prompts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Calming Soundscapes</p>
+                                    <p class="text-sm opacity-80">Traditional Acehnese melodies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-8 aceh-motif">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-dove text-indigo-400 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">SmongResQ</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Preserving Aceh's stories of resilience and peace through AI technology.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Story Archive</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Share Your Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Educational Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Our Mission</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">The Team</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Methodology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Partners</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-sm">USK</span>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-sm">BRR</span>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-sm">UNESCO</span>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-sm">AHA Centre</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 SmongResQ. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple interactivity for the map
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapAreas = document.querySelectorAll('.map-area');
+            
+            mapAreas.forEach(area => {
+                area.addEventListener('mouseenter', function() {
+                    this.style.fill = 'rgba(59, 130, 246, 0.3)';
+                });
+                
+                area.addEventListener('mouseleave', function() {
+                    this.style.fill = '#EFF6FF';
+                });
+                
+                area.addEventListener('click', function() {
+                    alert('Showing stories from this region. In a full implementation, this would load regional stories.');
+                });
+            });
+            
+            // Card hover effects
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                });
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=zhafranzz/tes-1" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
