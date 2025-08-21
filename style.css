@@ -1,98 +1,28 @@
-/* --- SmongResQ Global Styles --- */
-
-/* Reset beberapa style dasar */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-/* Definisikan warna-warna utama dengan CSS Variables */
-:root {
-    --primary-blue: #3b82f6;
-    --secondary-purple: #8b5cf6;
-    --light-blue-gradient: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-    --dark-blue-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --background-soft: #f8fafc;
-    --shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-heavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* --- Base Typography & Body --- */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--background-soft);
-    color: var(--text-primary);
-    line-height: 1.6;
+	padding: 2rem;
+	font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
+h1 {
+	font-size: 16px;
+	margin-top: 0;
 }
 
 p {
-    color: var(--text-secondary);
-    font-size: 1rem;
+	color: rgb(107, 114, 128);
+	font-size: 15px;
+	margin-bottom: 10px;
+	margin-top: 5px;
 }
-
-/* --- Reusable Components --- */
 
 .card {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 1.5rem; /* Lebih rounded dari template sebelumnya */
-    box-shadow: var(--shadow-light); /* Lebih lembut */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	max-width: 620px;
+	margin: 0 auto;
+	padding: 16px;
+	border: 1px solid lightgray;
+	border-radius: 16px;
 }
 
-.card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-heavy); /* Efek melayang yang lebih terasa */
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px; /* Tombol bulat */
-    font-weight: 500;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background-color: var(--primary-blue);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #2563eb;
-}
-
-.btn-secondary {
-    background-color: white;
-    color: var(--primary-blue);
-    border: 1px solid var(--primary-blue);
-}
-
-.btn-secondary:hover {
-    background-color: #f3f4f6;
-}
-
-.healing-gradient {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-}
-
-.wave-bg {
-    background: var(--dark-blue-gradient);
-    position: relative;
-    overflow: hidden;
-}
-
-.wave-bg::after {
-    /* Menghapus elemen gelombang karena ilustrasi baru */
-    content: none;
+.card p:last-child {
+	margin-bottom: 0;
 }
