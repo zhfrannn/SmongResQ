@@ -6,6 +6,10 @@
     <title>SmongResQ: AI-Powered Story Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -56,10 +60,14 @@
             background-repeat: repeat-x;
             background-size: 100px 20px;
         }
+        /* 2. TAMBAHKAN STYLE UNTUK MAPBOX DI SINI */
+        #map {
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
     </style>
 </head>
 <body class="text-gray-700">
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -86,7 +94,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="wave-bg text-white pt-20 pb-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
@@ -125,7 +132,6 @@
         </div>
     </section>
 
-    <!-- Story Collection Section -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -134,7 +140,6 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- WhatsApp Card -->
                 <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fab fa-whatsapp text-green-600 text-3xl"></i>
@@ -146,7 +151,6 @@
                     </button>
                 </div>
                 
-                <!-- Youth Ambassador -->
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
                     <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-hands-helping text-amber-600 text-3xl"></i>
@@ -158,7 +162,6 @@
                     </button>
                 </div>
                 
-                <!-- Upload Form -->
                 <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 shadow-md transition duration-300 card-hover">
                     <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-cloud-upload-alt text-indigo-600 text-3xl"></i>
@@ -173,7 +176,6 @@
         </div>
     </section>
 
-    <!-- AI Processing Section -->
     <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full opacity-10 aceh-motif"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -183,7 +185,6 @@
             </div>
             
             <div class="grid md:grid-cols-4 gap-6 mb-12">
-                <!-- NLP -->
                 <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
                     <div class="bg-blue-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                         <i class="fas fa-brain text-blue-600 text-2xl"></i>
@@ -192,7 +193,6 @@
                     <p class="text-gray-600 text-sm">Extracting themes, emotions, and key events from each story.</p>
                 </div>
                 
-                <!-- Translation -->
                 <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
                     <div class="bg-cyan-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                         <i class="fas fa-language text-cyan-600 text-2xl"></i>
@@ -201,7 +201,6 @@
                     <p class="text-gray-600 text-sm">Translating stories between Acehnese, Indonesian, and English.</p>
                 </div>
                 
-                <!-- Visualization -->
                 <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
                     <div class="bg-purple-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                         <i class="fas fa-chart-pie text-purple-600 text-2xl"></i>
@@ -210,7 +209,6 @@
                     <p class="text-gray-600 text-sm">Creating interactive timelines and infographics from narratives.</p>
                 </div>
                 
-                <!-- Gamification -->
                 <div class="bg-white rounded-2xl p-6 shadow-md transition duration-300 card-hover">
                     <div class="bg-orange-100 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                         <i class="fas fa-gamepad text-orange-600 text-2xl"></i>
@@ -220,7 +218,6 @@
                 </div>
             </div>
             
-            <!-- Process Flow -->
             <div class="bg-white rounded-2xl p-8 shadow-lg">
                 <div class="flex flex-col md:flex-row items-center justify-between">
                     <div class="mb-6 md:mb-0 text-center md:text-left">
@@ -234,7 +231,6 @@
                 
                 <div class="mt-8">
                     <div class="relative">
-                        <!-- Process Steps -->
                         <div class="hidden md:flex justify-between items-center mb-8">
                             <div class="flex flex-col items-center">
                                 <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mb-2">
@@ -265,7 +261,6 @@
                             </div>
                         </div>
                         
-                        <!-- Mobile Process Steps -->
                         <div class="md:hidden space-y-8">
                             <div class="flex items-start">
                                 <div class="w-10 h-10 bg-blue-500 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4">
@@ -310,7 +305,6 @@
         </div>
     </section>
 
-    <!-- Interactive Media Section -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -318,26 +312,12 @@
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Experience Aceh's stories through interactive digital formats.</p>
             </div>
             
-            <!-- Aceh Map -->
             <div class="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-md">
                 <h3 class="text-xl font-semibold mb-6 text-center">Stories by Region</h3>
-                <div class="relative">
-                    <svg viewBox="0 0 800 500" class="w-full h-auto">
-                        <!-- Simplified Aceh map outline -->
-                        <path id="banda-aceh" class="map-area" d="M200,150 Q250,120 300,150 Q350,180 400,170 Q450,160 500,180 Q550,200 600,190 L620,210 L600,230 L580,220 L560,240 L540,230 L520,250 L500,240 L480,260 L460,250 L440,270 L420,260 L400,280 L380,270 L360,290 L340,280 L320,300 L300,290 L280,310 L260,300 L240,320 L220,310 L200,330 L180,320 L160,340 L140,330 L120,350 L100,340 L80,360 L60,350 L40,370 L20,360 L0,380 L20,400 L40,390 L60,410 L80,400 L100,420 L120,410 L140,430 L160,420 L180,440 L200,430 L220,450 L240,440 L260,460 L280,450 L300,470 L320,460 L340,480 L360,470 L380,490 L400,480 L420,500 L440,490 L460,470 L480,460 L500,440 L520,430 L540,410 L560,400 L580,380 L600,370 L620,350 L640,340 L660,320 L680,310 L700,290 L720,280 L740,260 L760,250 L780,230 L800,220 L780,200 L760,190 L740,170 L720,160 L700,140 L680,130 L660,110 L640,100 L620,80 L600,70 L580,50 L560,40 L540,20 L520,10 L500,0 L480,10 L460,30 L440,40 L420,60 L400,70 L380,90 L360,100 L340,120 L320,130 L300,150 Z" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
-                        <text x="300" y="250" font-size="16" fill="#1E40AF" font-weight="bold">Banda Aceh</text>
-                        <text x="500" y="350" font-size="16" fill="#1E40AF" font-weight="bold">Meulaboh</text>
-                        <text x="400" y="150" font-size="16" fill="#1E40AF" font-weight="bold">Lhokseumawe</text>
-                    </svg>
-                    <div class="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md">
-                        <p class="text-sm text-gray-600">Click on any region to explore local stories</p>
-                    </div>
-                </div>
+                <div id="map" class="relative" style="height: 500px; width: 100%;"></div>
             </div>
             
-            <!-- Story Cards -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Digital Comic -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
                     <div class="h-48 bg-gradient-to-r from-amber-100 to-orange-100 flex items-center justify-center">
                         <i class="fas fa-book-open text-amber-500 text-6xl"></i>
@@ -354,7 +334,6 @@
                     </div>
                 </div>
                 
-                <!-- Audio Drama -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
                     <div class="h-48 bg-gradient-to-r from-blue-100 to-indigo-100 flex items-center justify-center relative">
                         <i class="fas fa-headphones text-indigo-500 text-6xl"></i>
@@ -375,7 +354,6 @@
                     </div>
                 </div>
                 
-                <!-- Simulation -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-md transition duration-300 card-hover">
                     <div class="h-48 bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
                         <i class="fas fa-gamepad text-purple-500 text-6xl"></i>
@@ -393,7 +371,6 @@
                 </div>
             </div>
             
-            <!-- Healing Mode -->
             <div class="mt-12 healing-gradient rounded-2xl p-8 text-white shadow-lg">
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="mb-6 md:mb-0 md:mr-8">
@@ -439,7 +416,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-white pt-12 pb-8 aceh-motif">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
@@ -512,25 +488,37 @@
     </footer>
 
     <script>
-        // Simple interactivity for the map
         document.addEventListener('DOMContentLoaded', function() {
-            const mapAreas = document.querySelectorAll('.map-area');
             
-            mapAreas.forEach(area => {
-                area.addEventListener('mouseenter', function() {
-                    this.style.fill = 'rgba(59, 130, 246, 0.3)';
+            // TODO: GANTI DENGAN ACCESS TOKEN MAPBOX LO
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhhZnJhbnp6IiwiYSI6ImNtZWxjNWQ4NDBib2EybHM2aXVuaXRidjQifQ.kPFBCelmb9ORs2S4sUENfQ'; 
+
+            const map = new mapboxgl.Map({
+                container: 'map', // ID dari wadah HTML
+                style: 'mapbox://styles/mapbox/streets-v11', // Gaya dasar peta
+                center: [95.32, 5.55], // Koordinat Banda Aceh
+                zoom: 12, // Zoom level awal
+                pitch: 60, // Sudut kemiringan untuk 3D
+                bearing: -30 // Arah peta
+            });
+
+            // Tambahkan kontrol navigasi (zoom dan rotasi)
+            map.addControl(new mapboxgl.NavigationControl());
+
+            // Aktifkan 3D terrain
+            map.on('style.load', () => {
+                map.addSource('mapbox-dem', {
+                    'type': 'raster-dem',
+                    'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+                    'tileSize': 512,
+                    'maxzoom': 14
                 });
-                
-                area.addEventListener('mouseleave', function() {
-                    this.style.fill = '#EFF6FF';
-                });
-                
-                area.addEventListener('click', function() {
-                    alert('Showing stories from this region. In a full implementation, this would load regional stories.');
-                });
+                map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
             });
             
-            // Card hover effects
+            // Di sini nanti kita akan tambahin marker dan pop-up cerita
+
+            // Card hover effects (biarkan kode ini tetap ada)
             const cards = document.querySelectorAll('.card-hover');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
