@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmongResQ: AI-Powered Story Archive</title>
+    <title>Suara Samudra - AI-Powered Story Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -16,29 +15,15 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f0f9ff;
         }
         
-        .wave-bg {
-            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
-            position: relative;
-            overflow: hidden;
+        .ocean-gradient {
+            background: linear-gradient(135deg, #006994 0%, #00b4d8 50%, #90e0ef 100%);
         }
         
-        .wave-bg::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 20%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8fafc' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        
-        .aceh-motif {
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0V0zm10 10h80v80H10V10zm20 20h40v40H30V30zm10 10h20v20H40V40z' fill='%233b82f6' fill-opacity='0.05'/%3E%3C/svg%3E");
+        .wave-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34.225V39h-2v-4.775a4 4 0 0 1-2-3.464V27a4 4 0 0 1 2-3.464V19h2v4.536a4 4 0 0 1 2 3.464v4.775a4 4 0 0 1-2 3.464zm2 0V39h-2v-4.775a4 4 0 0 1-2-3.464V27a4 4 0 0 1 2-3.464V19h2v4.536a4 4 0 0 1 2 3.464v4.775a4 4 0 0 1-2 3.464z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .card-hover:hover {
@@ -47,24 +32,43 @@
         }
         
         .map-area:hover {
-            fill: rgba(59, 130, 246, 0.3);
-            stroke: #3b82f6;
+            fill: rgba(0, 105, 148, 0.3);
+            stroke: #006994;
             stroke-width: 2px;
         }
         
         .healing-gradient {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #006994 0%, #00b4d8 100%);
         }
         
         .audio-wave {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q 5 5 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10' stroke='%233b82f6' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q 5 5 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10' stroke='%23006994' fill='none' stroke-width='2'/%3E%3C/svg%3E");
             background-repeat: repeat-x;
             background-size: 100px 20px;
         }
-        /* 2. TAMBAHKAN STYLE UNTUK MAPBOX DI SINI */
+
         #map {
             border-radius: 1rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            height: 500px;
+            width: 100%;
+        }
+
+        .mapboxgl-popup {
+            max-width: 400px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Bagian 2: Tambahkan CSS untuk marker */
+        .marker {
+            display: block;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #ff7e33;
         }
     </style>
 </head>
@@ -74,16 +78,16 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-dove text-indigo-500 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold text-gray-800">SmongResQ</span>
+                        <i class="fas fa-dove text-cyan-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">Suara Samudra</span>
                     </div>
                 </div>
                 <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
-                    <a href="#" class="text-indigo-600 font-medium">Home</a>
-                    <a href="#" class="text-gray-500 hover:text-indigo-600">Archive</a>
-                    <a href="#" class="text-gray-500 hover:text-indigo-600">About</a>
-                    <a href="#" class="text-gray-500 hover:text-indigo-600">Contact</a>
-                    <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition">Share Your Story</button>
+                    <a href="#" class="text-cyan-600 font-medium">Home</a>
+                    <a href="#" class="text-gray-500 hover:text-cyan-600">Archive</a>
+                    <a href="#" class="text-gray-500 hover:text-cyan-600">About</a>
+                    <a href="#" class="text-gray-500 hover:text-cyan-600">Contact</a>
+                    <button class="bg-cyan-500 text-white px-4 py-2 rounded-full hover:bg-cyan-600 transition">Share Your Story</button>
                 </div>
                 <div class="-mr-2 flex items-center md:hidden">
                     <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
@@ -94,8 +98,7 @@
             </div>
         </div>
     </nav>
-
-    <section class="wave-bg text-white pt-20 pb-32 relative">
+    <section class="ocean-gradient text-white pt-20 pb-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
                 <div class="mb-12 lg:mb-0">
@@ -103,10 +106,10 @@
                     <p class="text-xl md:text-2xl mb-8 font-light italic">"Stories of Resilience and Peace, Two Decades After the Wave"</p>
                     <p class="mb-8 text-lg">An AI-powered archive preserving Aceh's collective memory of disaster and peace through community stories.</p>
                     <div class="flex flex-wrap gap-4">
-                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition flex items-center">
+                        <button class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full font-medium transition flex items-center">
                             <i class="fab fa-whatsapp mr-2 text-xl"></i> Share Your Story
                         </button>
-                        <button class="bg-white hover:bg-gray-100 text-indigo-600 px-6 py-3 rounded-full font-medium transition">
+                        <button class="bg-white hover:bg-gray-100 text-cyan-600 px-6 py-3 rounded-full font-medium transition">
                             Explore Archive
                         </button>
                     </div>
@@ -118,8 +121,8 @@
                         </div>
                         <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
                             <div class="flex items-center">
-                                <div class="bg-indigo-100 p-3 rounded-full mr-3">
-                                    <i class="fas fa-microphone text-indigo-600 text-xl"></i>
+                                <div class="bg-cyan-100 p-3 rounded-full mr-3">
+                                    <i class="fas fa-microphone text-cyan-600 text-xl"></i>
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500">Latest Story</p>
@@ -178,7 +181,7 @@
     </section>
 
     <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 aceh-motif"></div>
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 wave-pattern"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">AI-Powered Story Processing</h2>
@@ -225,7 +228,7 @@
                         <h3 class="text-xl font-semibold mb-2">From Story to Digital Experience</h3>
                         <p class="text-gray-600">See how raw narratives become interactive learning tools.</p>
                     </div>
-                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-full font-medium transition">
+                    <button class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full font-medium transition">
                         View Process Details
                     </button>
                 </div>
@@ -315,7 +318,7 @@
             
             <div class="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-md">
                 <h3 class="text-xl font-semibold mb-6 text-center">Stories by Region</h3>
-                <div id="map" class="relative" style="height: 500px; width: 100%;"></div>
+                <div id="map" class="relative"></div>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -329,7 +332,7 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-2">The Wave Remembered</h3>
                         <p class="text-gray-600 mb-4">A visual retelling of survivor accounts through graphic storytelling.</p>
-                        <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <button class="text-cyan-600 hover:text-cyan-800 font-medium flex items-center">
                             Read Story <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -347,7 +350,7 @@
                         <h3 class="text-xl font-semibold mb-2">Voices from the Rubble</h3>
                         <p class="text-gray-600 mb-4">An immersive audio experience based on survivor testimonies.</p>
                         <div class="flex items-center justify-between">
-                            <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                            <button class="text-cyan-600 hover:text-cyan-800 font-medium flex items-center">
                                 Listen <i class="fas fa-play ml-2"></i>
                             </button>
                             <span class="text-sm text-gray-500">32 min</span>
@@ -365,7 +368,7 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-2">What Would You Do?</h3>
                         <p class="text-gray-600 mb-4">An interactive scenario based on real evacuation decisions.</p>
-                        <button class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <button class="text-cyan-600 hover:text-cyan-800 font-medium flex items-center">
                             Try Simulation <i class="fas fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -417,13 +420,13 @@
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-white pt-12 pb-8 aceh-motif">
+    <footer class="bg-gray-800 text-white pt-12 pb-8 wave-pattern">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <i class="fas fa-dove text-indigo-400 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold">SmongResQ</span>
+                        <i class="fas fa-dove text-cyan-400 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Suara Samudra</span>
                     </div>
                     <p class="text-gray-400 mb-4">Preserving Aceh's stories of resilience and peace through AI technology.</p>
                     <div class="flex space-x-4">
@@ -478,7 +481,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">© 2023 SmongResQ. All rights reserved.</p>
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 Suara Samudra. All rights reserved.</p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
                     <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
@@ -517,15 +520,90 @@
                 map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
             });
             
-            // Di sini nanti kita akan tambahin marker dan pop-up cerita
+            // Tambahkan marker-marker cerita di sini
+            const stories = [
+                {
+                    location: 'Banda Aceh',
+                    coordinates: [95.3213, 5.5539],
+                    title: 'The Wave That Changed Everything',
+                    content: 'I was 12 years old when the water came. The sound still haunts me...',
+                    type: 'Tsunami'
+                },
+                {
+                    location: 'Meulaboh',
+                    coordinates: [96.1264, 4.1458],
+                    title: 'Rebuilding Our Village Together',
+                    content: 'We had nothing left but each other. The gotong royong spirit is what saved us...',
+                    type: 'Recovery'
+                },
+                {
+                    location: 'Calang',
+                    coordinates: [95.9189, 4.5804],
+                    title: 'Lessons from the Field: Flash Flood',
+                    content: 'It was midnight when the flash flood came. Our neighbors helped us evacuate to a higher place...',
+                    type: 'Tsunami'
+                },
+                {
+                    location: 'Lhokseumawe',
+                    coordinates: [97.1472, 5.1768],
+                    title: 'From Conflict to Coffee Shop',
+                    content: 'My warung kopi became a neutral ground. Former enemies now share tables and stories...',
+                    type: 'Peace'
+                },
+                {
+                    location: 'Pulau Banyak',
+                    coordinates: [97.2372, 2.1158],
+                    title: 'Smong, The Whispering Sea',
+                    content: 'Our elders taught us to recognize the signs. When the sea recedes unexpectedly, we run to the hills...',
+                    type: 'Local Wisdom'
+                }
+            ];
 
-            // Card hover effects (biarkan kode ini tetap ada)
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-                });
+            stories.forEach(story => {
+                const el = document.createElement('div');
+                el.className = 'marker';
+
+                new mapboxgl.Marker(el)
+                    .setLngLat(story.coordinates)
+                    .setPopup(
+                        new mapboxgl.Popup({ offset: 25 })
+                            .setHTML(`
+                                <h4 class="font-semibold text-lg mb-1">${story.title}</h4>
+                                <p class="text-gray-600 text-sm mb-2">${story.location} &bull; ${story.type}</p>
+                                <p class="text-gray-700">${story.content}</p>
+                                <a href="#stories" class="text-cyan-600 hover:underline mt-2 inline-block">Read More</a>
+                            `)
+                    )
+                    .addTo(map);
             });
+
+            // Fungsi modal yang sudah ada
+            function showStory(storyId) {
+                document.getElementById('storyModal').classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+            
+            function closeModal() {
+                document.getElementById('storyModal').classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+            
+            document.getElementById('storyModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Simulation progress (demo only)
+            let progress = 25;
+            const progressBar = document.querySelector('.simulation-progress-bar');
+            
+            function updateProgress(newProgress) {
+                progress = newProgress;
+                progressBar.style.width = `${progress}%`;
+                document.querySelector('.simulation-progress span:last-child').textContent = `${progress}%`;
+            }
         });
     </script>
+</body>
 </html>
